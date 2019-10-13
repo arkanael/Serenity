@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using Serenity.Infra.Data.Contacts.Repositories;
 using Serenity.Infra.Data.Entities;
 using System.Collections.Generic;
@@ -9,6 +10,16 @@ namespace Serenity.Infra.Data.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
+        //private IConfiguration configuration;
+
+        //private readonly string ConnectionString;
+
+        //public UsuarioRepository(IConfiguration configuration)
+        //{
+        //    this.configuration = configuration;
+        //    ConnectionString = "SerenityDB";
+        //}
+
         private readonly SqlConnection sqlConnection;
 
         public UsuarioRepository(SqlConnection sqlConnection)
@@ -18,7 +29,7 @@ namespace Serenity.Infra.Data.Repositories
         
         public void Create(Usuario usuario)
         {
-            var query = "Insert into Usuario(Nome, Login, Senha, DataCriacao) values(@Nome, @Login, @Senha, @GetDate())";
+            var query = "Insert into Usuario(Nome, Login, Senha, DataCriacao) values(@Nome, @Login, @Senha, getdate())";
             sqlConnection.Execute(query, usuario);
         }
 
@@ -43,19 +54,19 @@ namespace Serenity.Infra.Data.Repositories
         public Usuario Get(int key)
         {
             var query = "Select * from Usuario where IdUsuario = @IdUsuario";
-            return sqlConnection.QuerySingleOrDefault(query, new { IdUsuario = key });
+            return sqlConnection.QuerySingleOrDefault<Usuario>(query, new { IdUsuario = key });
         }
 
         public Usuario Get(string login)
         {
             var query = "Select * from Usuario where Login = @Login";
-            return sqlConnection.QuerySingleOrDefault(query, new { login });
+            return sqlConnection.QuerySingleOrDefault<Usuario>(query, new { login });
         }
 
         public Usuario Get(string login, string senha)
         {
             var query = "Select * from Usuario where Login = @Login and senha = @Senha";
-            return sqlConnection.QuerySingleOrDefault(query, new { login, senha });
+            return sqlConnection.QuerySingleOrDefault<Usuario>(query, new { login, senha });
         }
 
         public void Dispose()
