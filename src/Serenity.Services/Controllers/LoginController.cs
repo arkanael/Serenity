@@ -12,9 +12,7 @@ namespace Serenity.Services.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost]
-        public IActionResult POST([FromBody] LoginUsuarioViewModel model, 
-            [FromServices] IUsuarioRepository usuarioRepository,
-            [FromServices] ICriptografia criptografia)
+        public IActionResult POST([FromBody] LoginUsuarioViewModel model, [FromServices] IUsuarioRepository usuarioRepository, [FromServices] ICriptografia criptografia)
         {
             if (ModelState.IsValid)
             {
