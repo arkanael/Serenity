@@ -10,27 +10,19 @@ namespace Serenity.Infra.Data.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        //private IConfiguration configuration;
-
-        //private readonly string ConnectionString;
-
-        //public UsuarioRepository(IConfiguration configuration)
-        //{
-        //    this.configuration = configuration;
-        //    ConnectionString = "SerenityDB";
-        //}
-
+        private IConfiguration configuration;
         private readonly SqlConnection sqlConnection;
 
-        public UsuarioRepository(SqlConnection sqlConnection)
+        public UsuarioRepository(IConfiguration configuration)
         {
-            this.sqlConnection = sqlConnection;
+            this.configuration = configuration;
+            sqlConnection = new SqlConnection(configuration.GetConnectionString("SerenityDB"));
         }
-        
+
         public void Create(Usuario usuario)
         {
             var query = "Insert into Usuario(Nome, Login, Senha, DataCriacao) values(@Nome, @Login, @Senha, getdate())";
-            sqlConnection.Execute(query, usuario);
+            sqlConnection.Execute(query, usuario);          
         }
 
         public void Update(Usuario usuario)

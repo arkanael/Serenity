@@ -28,7 +28,7 @@ namespace Serenity.Services
 
             services.AddTransient<ICriptografia, Criptografia>();
 
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>(map => new UsuarioRepository(new SqlConnection(connectionString)));
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
             services.AddSwaggerGen(s =>
             {

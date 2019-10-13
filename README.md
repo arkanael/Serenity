@@ -1,13 +1,16 @@
-JWT 
+Serenity
+Projeto de Autenticação em WebApi
 
-Autenticação em WEAPI
+Tecnologias:
 
-ASPNET.NET CORE 2.2
-Injecção de dependência
-Automapper
-Dapper
-SQLSERVER LocalDB
-Data Driven Design
-Criptografia
-Injeção de Dependencia
+*ASP.NET CORE 2.2
+*Repository Pattern
+*Dapper
+*SQLSERVER LocalDB
+*Data Driven Design
+*Criptografia
+*Swagger
+
+
+Para rodar este projeto:
 
